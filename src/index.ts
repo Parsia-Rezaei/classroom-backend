@@ -8,9 +8,12 @@ const PORT = 8000;
 // JSON middleware
 app.use(express.json());
 app.use("/api/v1/subjects", subjectsRouter);
+if(!process.env.FRONTEND_URL) {
+   throw new Error("FRONTEND_URl is not set in .env file")
+}
 app.use(
   cors({
-    origin: process.env.FONTEND_URL,
+    origin: process.env.FRONTEND_URL,
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   }),
