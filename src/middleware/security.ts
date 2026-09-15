@@ -24,12 +24,13 @@ const securityMiddleware = async (
       case "student":
         limit = 10;
         message = "User request lmimt exceeded (10 per mminute) Please wait";
+        break;
       default:
         limit = 5;
         message = "User request limit exceeded (5 per min)";
         break;
     }
-    
+
     const client = aj.withRule(
       slidingWindow({
         mode: "LIVE",
@@ -66,7 +67,7 @@ const securityMiddleware = async (
         });
     }
     if (desicion.isDenied() && desicion.reason.isRateLimit()) {
-      return res.status(403).json({ error: "Forbidden", message });
+      return res.status(429).json({ error: "Too many requests", message });
     }
     
     next() // yes finally you can proceed
