@@ -8,12 +8,6 @@ const PORT = 8000;
 
 // middelewares
 app.use(express.json());
-app.use(securityMiddleware)
-app.use("/api/v1/subjects", subjectsRouter);
-
-if(!process.env.FRONTEND_URL) {
-   throw new Error("FRONTEND_URl is not set in .env file")
-}
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,
@@ -21,6 +15,13 @@ app.use(
     credentials: true,
   }),
 );
+
+app.use(securityMiddleware);
+app.use("/api/v1/subjects", subjectsRouter);
+
+if (!process.env.FRONTEND_URL) {
+  throw new Error("FRONTEND_URl is not set in .env file");
+}
 
 // Root route
 app.get("/", (req, res) => {
