@@ -1,6 +1,6 @@
-import arcjet, { slidingWindow } from "@arcjet/node";
+import arcjet, { detectBot, shield, slidingWindow } from "@arcjet/node";
 
-if (!process.env.ARCJET_KEY && process.env.NODE_ENV == !"test") {
+if (!process.env.ARCJET_KEY && process.env.NODE_ENV !== "test") {
   throw new Error(
     "The ARCJET_KEY is not available in .evn file, please provide the requested file",
   );

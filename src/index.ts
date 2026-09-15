@@ -8,8 +8,8 @@ const PORT = 8000;
 
 // middelewares
 app.use(express.json());
-app.use("/api/v1/subjects", subjectsRouter);
 app.use(securityMiddleware)
+app.use("/api/v1/subjects", subjectsRouter);
 
 if(!process.env.FRONTEND_URL) {
    throw new Error("FRONTEND_URl is not set in .env file")
