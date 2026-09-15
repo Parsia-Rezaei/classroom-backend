@@ -1,13 +1,16 @@
 import express from "express";
 import { subjectsRouter } from "./routes/subjects.route.js";
 import cors from "cors";
+import securityMiddleware from "./middleware/security.js";
 
 const app = express();
 const PORT = 8000;
 
-// JSON middleware
+// middelewares
 app.use(express.json());
 app.use("/api/v1/subjects", subjectsRouter);
+app.use(securityMiddleware)
+
 if(!process.env.FRONTEND_URL) {
    throw new Error("FRONTEND_URl is not set in .env file")
 }
