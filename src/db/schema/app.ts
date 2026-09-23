@@ -67,7 +67,7 @@ export const classes = pgTable(
     capacity: integer("capacity").notNull().default(50),
     description: text("description"),
     status: classStatusEnum("status").notNull().default("active"),
-    schedules: jsonb("schedules").$type<Schedule[]>().notNull(),
+    schedules: jsonb("schedules").$type<Scheduler[]>().notNull(),
 
     ...timestamps,
   },
